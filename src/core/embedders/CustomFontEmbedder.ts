@@ -237,12 +237,11 @@ class CustomFontEmbedder {
   }
 
   private allGlyphsInFontSortedById = (): Glyph[] => {
-    const glyphs: Glyph[] = new Array(this.font.characterSet.length);
-    for (let idx = 0, len = glyphs.length; idx < len; idx++) {
-      const codePoint = this.font.characterSet[idx];
-      glyphs[idx] = this.font.glyphForCodePoint(codePoint);
-    }
-    return sortedUniq(glyphs.sort(byAscendingId), (g) => g.id);
+			const glyphs: Glyph[] = new Array(this.font.numGlyphs);
+			for (let idx = 0, len = glyphs.length; idx < len; idx++) {
+					glyphs[idx] = this.font.getGlyph(idx);
+			}
+			return sortedUniq(glyphs.sort(byAscendingId), (g) => g.id);
   };
 }
 
